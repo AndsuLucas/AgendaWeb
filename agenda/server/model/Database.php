@@ -4,13 +4,28 @@ namespace Server\Model;
 use PDO;
 
 abstract class Database 
-{
+{						
+	
 
-	public function connect()
-	{
+
+	public  function connect()
+	{	
+									 //array de configuração presente em config.php	
+		$connection  = "mysql:host=". DATABASE["host"].   ";";
+		$connection .= "dbname=".     DATABASE["dbname"]. ";";
+		$connection .= "charset=".    DATABASE["charset"]    ;
 		
-		$db = new PDO("mysql:host=localhost;dbname=agenda;charset=utf8",'root','password');
-		$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
+		try {
+			
+			$db = new PDO($connection, DATABASE["user"], DATABASE["password"]);
+			$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
+			
+		} catch (PDOException $e) {
+			
+			return $e->getMessage();
+		
+		}
+		
 		return $db;
 
 	}

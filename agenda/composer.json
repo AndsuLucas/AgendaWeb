@@ -5,7 +5,10 @@
    	"autoload":{
    		"files":[
    			"./server/functions/session.php",
-   			"./server/functions/helpers.php"
+   			"./server/functions/helpers.php",
+        "./server/functions/pages.php",
+        "./server/config.php"
+
    		],
    		"psr-4": {
 			"Server\\Model\\":"./server/model"			

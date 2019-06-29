@@ -26,14 +26,14 @@ $app->post("/login", function(Request $request, Response $response){
 		$_SESSION["SESSAO_USUARIO"]["NOME"]  = $dados_usuario["nome_usuario"];
 		
 
-		return $response->withRedirect('/public/', 302);
+		return $response->withRedirect('/?page=agenda', 302);
 		
 		
 	}
 
 	$_SESSION["mensagem"] = "Login ou Senha inválidos";
 	
-	return $response->withRedirect('/public/login.php', 302);
+	return $response->withRedirect('/?page=login', 302);
 	
 
 
@@ -45,7 +45,7 @@ $app->post("/logout", function(Request $request, Response $response){
 	
 	session_destroy();
 
-	return $response->withRedirect("/public/login.php",302);
+	return $response->withRedirect("/?page=login",302);
 
 });
 

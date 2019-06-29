@@ -25,6 +25,7 @@ $(document).ready(function(){
 			retornarTarefas();
 		});
 	}
+	//função responsável por informar alterações e falhas ao usuário
 	function adicionarMesagem(mensagem, success) {
 		const type = success || false;
 		if (type) {
@@ -70,7 +71,6 @@ $(document).ready(function(){
 	
 
 	$("#add-item").keydown(adicionarTarefa);
-	//preciso colocar uma confirmação aqui
 	function salvarEdicao(novoTexto,id_texto) {
 			var parametros = {texto: novoTexto}
 			
@@ -101,7 +101,7 @@ $(document).ready(function(){
 						.val(conteudo)
 						.css("margin-top","25px")
 						.addClass("input-edit")
-				)
+				);
 
 			$(item).children("#edit").text("Salvar Edição");
 			lastClicked = $(this);
@@ -126,32 +126,31 @@ $(document).ready(function(){
 			$(response).each(function(posicao, elemento){
 				tarefas.push(elemento);
 				$("#lista-tarefas").append(
-				$("<li />").addClass("list-group-item").append(
-					$("<div / >").addClass("checkbox").attr("id","item")
-						.append(
-						$("<input />")
-							.attr("type","checkbox")
-							.addClass("checkbox-item")
-							.attr("value",elemento.id)
-						).append(
-						$("<label />")
-							.attr("for","checkbox")
-							.addClass("text-item")
-							.text(elemento.conteudo)
-							
-						).append(
-						$("<p />")
-							.attr("id","edit")
-							.text("editar")
-							.append($("<span />")
-								.addClass("glyphicon glyphicon-pencil")
-							).click(editarTarefa)
-						)
+					$("<li />").addClass("list-group-item").append(
+						$("<div / >").addClass("checkbox").attr("id","item")
+							.append(
+							$("<input />")
+								.attr("type","checkbox")
+								.addClass("checkbox-item")
+								.attr("value",elemento.id)
+							).append(
+							$("<label />")
+								.attr("for","checkbox")
+								.addClass("text-item")
+								.text(elemento.conteudo)
+								
+							).append(
+							$("<p />")
+								.attr("id","edit")
+								.text("editar")
+								.append($("<span />")
+									.addClass("glyphicon glyphicon-pencil")
+								).click(editarTarefa)
+							)
 					)
 				);
 			});
 		});
-
 	}
 
 
@@ -164,7 +163,7 @@ $(document).ready(function(){
 		var confirmacao = confirm("Deseja mesmo deletar estas tarefas?")	
 		if (confirmacao) {
 			
-			deletarTarefa()
+			deletarTarefa();
 		} else {
 
 		}
@@ -228,38 +227,5 @@ $(document).ready(function(){
 			});
 		
 	}
-
-	function Modal(domModalElement){
-		const visibilidade = false;
-		const element      = domModalElement || undefined;
-
-
-
-		this.mostrarElemento = function(){
-			if (!visibilidade) {
-				$(element).fadeIn();
-				
-			}
-		}
-
-		this.esconderElemento = function(){
-			if (visiblidade) {
-				$(element).fadeOut();
-				
-			}
-		}
-
-		this.checkarVisibilidade = function(){
-
-			return visibilidade;
-
-		}
-
-
-
-
-
-	}
-
 	$("#search-item").keyup(procurarTarefa);
 });

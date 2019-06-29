@@ -1,12 +1,12 @@
 <?php 
-require_once "../vendor/autoload.php";
+require_once "./vendor/autoload.php";
 if (!session_start()) {
 	session_staart();
 }
 if (isset($_SESSION["SESSAO_USUARIO"]["LOGIN"])) {
 	if ($_SESSION["SESSAO_USUARIO"]["LOGIN"]) {
 
-		header("location: /public/");
+		header("location: /");
 
 	}
 }
@@ -25,12 +25,35 @@ if (isset($_SESSION["SESSAO_USUARIO"]["LOGIN"])) {
 			}#mensagem p{
 				border-color: #00004e;
 				font-weight: bold;
+			}#container-externo{
+				padding-top: 30px;
+			}#container-interno{
+				max-width: 400px; 
+				margin: 0 auto; 
+				border: 2px solid #00000000; 
+				border-radius: 5px 5px 5px 5px; 
+				padding: 15px; 
+				background-color: #ffffff; 
+				max-height: 600px; 
+				color:#00004e; 
+				box-shadow: #85858c 4px 4px 20px 5px;
+
+			}#entrar{
+				margin-top: 15px;
+				background-color: #00004e;
+				border: none;
+			}#btn-cadastrar{
+				margin-top: 15px;
+				background-color: #00004e;
+				border: none;
+			}body{
+				background-color: #010129
 			}
 		</style>
 	</head>
-	<body style="background-color: #010129;">
-		<div class="container" style="padding-top: 30px;">
-			<div class="container " style="max-width: 400px; margin: 0 auto; border: 2px solid #00000000; border-radius: 5px 5px 5px 5px; padding: 15px; background-color: #ffffff; max-height: 600px; color:#00004e; box-shadow: #85858c 4px 4px 20px 5px;">
+	<body>
+		<div class="container" id="container-externo">
+			<div class="container" id="container-interno">
 				<div id="mensagem">
 					<?=getMessage()?>
 				</div> <!--mensagem-->
@@ -40,8 +63,8 @@ if (isset($_SESSION["SESSAO_USUARIO"]["LOGIN"])) {
 					<input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off">
 					<label for="">Senha</label>
 					<input type="password" class="form-control" id="senha" name="senha" autocomplete="off">
-					<input type="submit" name="submit" value="ENTRAR" class="btn btn-primary col-md-12 col-sm-12 col-lg-12" style="margin-top: 15px;background-color: #00004e;border: none;">
-					<a href="#" class="btn btn-primary col-md-12 col-sm-12 col-lg-12" style="margin-top: 15px;background-color: #00004e;border: none;">CADASTRAR-SE</a>
+					<input type="submit" name="submit" value="ENTRAR" class="btn btn-primary col-md-12 col-sm-12 col-lg-12" id="entrar">
+					<a href="#" class="btn btn-primary col-md-12 col-sm-12 col-lg-12" id="btn-cadastrar">CADASTRAR-SE</a>
 					<div class="text-center" style="padding-top: 2rem;">
 						<small>
 							<strong>	

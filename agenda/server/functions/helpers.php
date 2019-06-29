@@ -1,5 +1,4 @@
 <?php  
-
 function debug($dump)   {
     echo "<pre>";
 
