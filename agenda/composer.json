@@ -1,0 +1,15 @@
+{
+    "require": {
+        "slim/slim": "^3.12"
+    },
+   	"autoload":{
+   		"files":[
+   			"./server/functions/session.php",
+   			"./server/functions/helpers.php"
+   		],
+   		"psr-4": {
+			"Server\\Model\\":"./server/model"			
+   		}
+   	}
+
+}
