@@ -101,7 +101,7 @@ class Model
 
 		$select->execute();
 
-		$result = $select->fetchAll();
+		$result = $select->fetch();
 		return $result;
 	}
 

@@ -2,7 +2,6 @@
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-
 if (!session_start()) {
 	session_start();
 }
@@ -24,6 +23,7 @@ $app->post("/login", function(Request $request, Response $response){
 	if (count($dados_usuario) !== 0){
 		$_SESSION["SESSAO_USUARIO"]["LOGIN"] = true;
 		$_SESSION["SESSAO_USUARIO"]["NOME"]  = $dados_usuario["nome_usuario"];
+		
 		
 
 		return $response->withRedirect('/?page=agenda', 302);

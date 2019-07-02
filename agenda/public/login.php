@@ -1,16 +1,8 @@
 <?php 
 require_once "./vendor/autoload.php";
-if (!session_start()) {
-	session_staart();
+if (checkLogin()) {
+	header("location: /?page=agenda");
 }
-if (isset($_SESSION["SESSAO_USUARIO"]["LOGIN"])) {
-	if ($_SESSION["SESSAO_USUARIO"]["LOGIN"]) {
-
-		header("location: /");
-
-	}
-}
-
 ?>
 <!DOCTYPE html>
 <html>
