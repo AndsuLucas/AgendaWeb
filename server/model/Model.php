@@ -32,7 +32,7 @@ class Model
 	{
 		$sql = "SELECT * FROM $this->table";
 		
-		$select = $this->database->query($sql);
+		$select = $this->database->prepare($sql);
 		$select->execute();
 		$result = $select->fetchAll();
 
@@ -102,6 +102,7 @@ class Model
 		$select->execute();
 
 		$result = $select->fetch();
+		//debug($result);
 		return $result;
 	}
 

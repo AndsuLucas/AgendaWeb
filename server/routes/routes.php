@@ -20,7 +20,7 @@ $app->post("/login", function(Request $request, Response $response){
 	$dados_usuario = $model->login("usuario", $login, $password);
 
 	
-	if (count($dados_usuario) !== 0){
+	if ($dados_usuario){
 		$_SESSION["SESSAO_USUARIO"]["LOGIN"] = true;
 		$_SESSION["SESSAO_USUARIO"]["NOME"]  = $dados_usuario["nome_usuario"];
 		
