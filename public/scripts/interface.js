@@ -20,7 +20,7 @@ $(document).ready(function(){
 		$.ajax({
 			method: "post",
 			data: info,
-			url: "http://localhost:8000/server/index.php/insert"
+			url: "/https://agendadoanderson.herokuapp.com/insert"
 		}).done(function(){
 			retornarTarefas();
 		});
@@ -77,7 +77,7 @@ $(document).ready(function(){
 			lastClicked = undefined;
 
 			$.ajax({
-				url: "http://localhost:8000/server/index.php/update/"+id_texto,
+				url: "https://agendadoanderson.herokuapp.com/index.php/update/"+id_texto,
 				data: parametros,
 				method: "put"
 
@@ -120,7 +120,7 @@ $(document).ready(function(){
 		tarefas = [];
 		$.ajax({
 			method: "get",
-			url: "http://localhost:8000/server/index.php/viewall",
+			url: "https://agendadoanderson.herokuapp.com/index.php/viewall",
 			dataType: "json"
 		}).done(function(response){
 			$(response).each(function(posicao, elemento){
@@ -178,7 +178,7 @@ $(document).ready(function(){
 			if ($(value).prop("checked")) {
 				$.ajax({
 					method: 'delete',
-					url:  "http://localhost:8000/server/index.php/delete/"+$(value).val(),
+					url:  "https://agendadoanderson.herokuapp.com/index.php/delete/"+$(value).val(),
 					dataType: "json"
 				}).done(function(response){
 					var jsonResponse = JSON.parse(response);
