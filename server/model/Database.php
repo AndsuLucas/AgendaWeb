@@ -8,7 +8,7 @@ abstract class Database
 	
 
 
-	public  function connect()
+	public  static function connect()
 	{	
 									 //array de configuração presente em config.php	
 		$connection  = "pgsql:host=". DATABASE["host"].";port=".DATABASE["port"].   ";";
