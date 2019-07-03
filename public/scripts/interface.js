@@ -7,6 +7,7 @@
 *
 */
 
+
 //intermédio back-front JQUERY
 $(document).ready(function(){
 	//variavel para guardar o ultimo elemento clicado
@@ -20,7 +21,7 @@ $(document).ready(function(){
 		$.ajax({
 			method: "post",
 			data: info,
-			url: "/https://agendadoanderson.herokuapp.com/insert"
+			url: "https://agendadoanderson.herokuapp.com/server/index.php/insert"
 		}).done(function(){
 			retornarTarefas();
 		});
@@ -77,7 +78,7 @@ $(document).ready(function(){
 			lastClicked = undefined;
 
 			$.ajax({
-				url: "https://agendadoanderson.herokuapp.com/index.php/update/"+id_texto,
+				url: "https://agendadoanderson.herokuapp.com/server/index.php/update/"+id_texto,
 				data: parametros,
 				method: "put"
 
@@ -120,10 +121,16 @@ $(document).ready(function(){
 		tarefas = [];
 		$.ajax({
 			method: "get",
-			url: "https://agendadoanderson.herokuapp.com/index.php/viewall",
+			url: "https://agendadoanderson.herokuapp.com/server/index.php/viewall",
 			dataType: "json"
 		}).done(function(response){
 			$(response).each(function(posicao, elemento){
+				/*
+					Arrumar um jeito de fazer este select apenas uma vez.
+					Armazenar em um localstorage etc para evitar ficar dando select sempre..
+
+					
+				*/
 				tarefas.push(elemento);
 				$("#lista-tarefas").append(
 					$("<li />").addClass("list-group-item").append(
@@ -178,7 +185,7 @@ $(document).ready(function(){
 			if ($(value).prop("checked")) {
 				$.ajax({
 					method: 'delete',
-					url:  "https://agendadoanderson.herokuapp.com/index.php/delete/"+$(value).val(),
+					url:  "https://agendadoanderson.herokuapp.com/server/index.php/delete/"+$(value).val(),
 					dataType: "json"
 				}).done(function(response){
 					var jsonResponse = JSON.parse(response);
@@ -197,7 +204,6 @@ $(document).ready(function(){
 		$("#lista-tarefas").empty();
 			$(tarefas).each(function(posicao,elemento){
 				if (elemento.conteudo.match(texto)) {
-
 
 					$("#lista-tarefas").append(
 						$("<li />").addClass("list-group-item").append(
