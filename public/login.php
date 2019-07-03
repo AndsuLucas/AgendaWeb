@@ -50,7 +50,7 @@ if (checkLogin()) {
 					<?=getMessage()?>
 				</div> <!--mensagem-->
 				<h2 class="text-center"> Login - [ Agenda ]</h2>
-				<form action="https://agendadoanderson.herokuapp.com/index.php/server/login" id="login" method="POST">
+				<form action="https://agendadoanderson.herokuapp.com/server/index.php/login" id="login" method="POST">
 					<label for="">Usuário</label>
 					<input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off">
 					<label for="">Senha</label>
