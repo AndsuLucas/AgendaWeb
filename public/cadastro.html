@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+	#container-externo{
+		max-width: 800px;
+		padding-top: 100px;
+	}
+	#frm-cadastro{
+		border: 2px solid #00000000;
+		padding: 2%;
+		border-radius: 5px 5px 5px 5px;
+		background-color: white;
+		box-shadow: #85858c 4px 4px 20px 5px;
+	}body{
+		background-color: #010129;
+	}.lbl,h1{
+		color: #00004e;
+		font-weight: bold;
+	}#frm-cadastro input{
+		border-color: #00004e; 
+	}#cadastrar{
+		background-color: #00004e;
+	}
+</style>
+<div class="container" id="container-externo"> 
+	<form id="frm-cadastro">
+		<h1 class="text-center">Cadastro</h1>
+		<div class="form-group">
+			<label for="nome" class="lbl">Nome</label>
+			<input type="text" class="form-control" id="nome" name="nome" value="">
+		</div>
+		<div class="form-group">
+			<label for="email" class="lbl">Email</label>
+			<input type="email" class="form-control" id="email" name="email" value="">
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="senha" class="lbl">Senha</label>
+				<input type="password" class="form-control" id="senha" name="senha" value="">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="rptsenha" class="lbl">Repetir senha</label>
+				<input type="password" class="form-control" id="rptsenha" name="rptsenha" value="">
+			</div>
+		</div>
+		<div>
+			<input type="submit" class="btn btn-primary col-md-12" value="CADASTRAR" id="cadastrar" >
+		</div>
+	</form>
+</div>
+<script>
+	(function(){
+		const formulario = document.querySelector("#frm-cadastro");
+		
+		formulario.addEventListener("submit", function(event){
+			const nome     = document.querySelector("#nome");
+			const senha    = document.querySelector("#senha");
+			const rptsenha = document.querySelector("#rptsenha");
+			const email    = document.querySelector("#email");
+			nome.style.backgroundColor = "#00004e";
+			senha.style.backgroundColor = "#00004e";
+			rptsenha.style.backgroundColor = "#00004e";
+			email.style.backgroundColor = "#00004e";
+			var validation = true;
+			if (senha.value !== rptsenha.value){
+				validation = false;
+				senha.style.backgroundColor = "red";
+				rptsenha.style.backgroundColor = "red";
+			
+			}
+			if (senha.value.trim().length === 0){
+				validation = false;
+			}
+			if (rptsenha.value.trim().length === 0){
+				validation = false;
+			}
+			if (nome.value.trim().length === 0){
+				validation =  false;
+			}
+			if (email.value.trim().length === 0){
+				validation = false;
+			}
+			
+			if (!validation) {
+				alert("algum está errado")
+				event.preventDefault();
+			}
+			
+		});
+		
+		
+	})();
+
+</script>
