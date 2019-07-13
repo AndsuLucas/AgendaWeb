@@ -1,11 +1,14 @@
 <?php  
 
 namespace Server\Model;
+
+use Server\Model\Database;
+
 //na vdd preciso deixar essa classe abstrata
 class Model
 {
-	private $table;
-	private $database;
+	protected $table;
+	protected $database;
 	
 	public function __construct($choice_table)
 	{
@@ -28,14 +31,15 @@ class Model
 	  	return $result;
 	}
 
-	public function selectAll()
+	public function select(array $fields)
 	{
-		$sql = "SELECT * FROM $this->table";
+		$sql  = "SELECT ";
+		$sql .= implode(", ",$fields)." FROM $this->table";
 		
 		$select = $this->database->prepare($sql);
 		$select->execute();
 		$result = $select->fetchAll();
-
+		
 		return $result;
 	}
 
@@ -90,20 +94,5 @@ class Model
 
 	}
 
-	public function login($table, $login, $password)
-	{
-
-		$sql 	= "SELECT * FROM $table WHERE usuario = ? AND senha = ?";
-		$select = $this->database->prepare($sql);
-		
-		$select->bindValue(1,$login);
-		$select->bindValue(2,$password);
-
-		$select->execute();
-
-		$result = $select->fetch();
-		//debug($result);
-		return $result;
-	}
 
 }

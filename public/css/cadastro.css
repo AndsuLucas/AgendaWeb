@@ -1,0 +1,26 @@
+#container-externo{
+		max-width: 800px;
+		padding-top: 100px;
+}
+#frm-cadastro
+{
+		border: 2px solid #00000000;
+		padding: 2%;
+		border-radius: 5px 5px 5px 5px;
+		background-color: white;
+		box-shadow: #85858c 4px 4px 20px 5px;
+}
+body{
+	background-color: #010129;
+}
+.lbl,h1{
+		color: #00004e;
+		font-weight: bold;
+}
+#frm-cadastro input{
+		border-color: #00004e; 
+}#cadastrar{
+		background-color: #00004e;
+}#frm-cadastro input:focus{
+	background-color: white !important;
+}

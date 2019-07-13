@@ -1,7 +1,9 @@
 <?php
-if (!$_SESSION["SESSAO_USUARIO"]["LOGIN"]) {
+if (!checkLogin()) {
 	header("location: /?page=login");
+
 }
+
 ?>
 <link rel="stylesheet" href="public/css/agenda.css">
 <div class="panel panel-primary" style="border-radius: 0px;">
@@ -12,7 +14,7 @@ if (!$_SESSION["SESSAO_USUARIO"]["LOGIN"]) {
 				<button type="submit" class="btn btn-danger btn-sm" id="logout">Sair</button>
 			</form>
 			<button id="deletar"><span class="glyphicon glyphicon-trash"></span>Delete</button>
-			<button id=""><span class="glyphicon glyphicon-flag"></span>Flag</button>
+			<button id=""><span class="glyphicon glyphicon-user"></span>User</button>
 		</div>
 	</div><!--cabeçalho-->
 </div><!--panel-primary-->
@@ -25,7 +27,7 @@ if (!$_SESSION["SESSAO_USUARIO"]["LOGIN"]) {
 			<div class="input-group" id="div-add-main">
 				<input type="text" id="add-item" class="form-control" placeholder="Adiciona nova Tarefa">
 				<div class="input-group-prepend" id="div-button-add">
-					<button id="btn-add" class="btn btn-outline-secondary" type="button"><span data-feather="check"></span></button>
+					<button id="btn-add" class="btn btn-outline-secondary" type="button"><span class="glyphicon glyphicon-plus-sign"></span></button>
 				</div>
 				<!--div-button-add-->
 			</div>
@@ -36,7 +38,7 @@ if (!$_SESSION["SESSAO_USUARIO"]["LOGIN"]) {
 			<div class="input-group" id="div-pesquisa-main">
 				<input type="text" class="form-control" placeholder="Pesquisar" aria-label="" aria-describedby="basic-addon1" id="search-item"><!--input-pesquisa-->
 				<div class="input-group-prepend" id="div-button-pesquisa">
-					<button id="btn-pesquisar" class="btn btn-outline-secondary" type="button"><span data-feather="search"></span></button>
+					<button id="btn-pesquisar" class="btn btn-outline-secondary" type="button"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 				<!--div-button-pesquisa-->
 			</div>
@@ -79,9 +81,6 @@ if (!$_SESSION["SESSAO_USUARIO"]["LOGIN"]) {
 </div>
 <!--rodape-->
 
-<script src="/public/jquery.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+
 <script src="/public/scripts/interface.js"></script>
-<script>
-	feather.replace();
-</script>

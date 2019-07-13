@@ -146,5 +146,4 @@ if (!$_SESSION["SESSAO_USUARIO"]["LOGIN"]) {
 				<script>
 					feather.replace();
 				</script>
-			</body>
-		</html>
+		

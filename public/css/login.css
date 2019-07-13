@@ -1,0 +1,29 @@
+#login input{
+	border-color:#00004e !important;
+}#mensagem p{
+	border-color: #00004e;
+	font-weight: bold;
+			}#container-externo{
+				padding-top: 30px;
+			}#container-interno{
+				max-width: 400px; 
+				margin: 0 auto; 
+				border: 2px solid #00000000; 
+				border-radius: 5px 5px 5px 5px; 
+				padding: 15px; 
+				background-color: #ffffff; 
+				max-height: 600px; 
+				color:#00004e; 
+				box-shadow: #85858c 4px 4px 20px 5px;
+
+			}#entrar{
+				margin-top: 15px;
+				background-color: #00004e;
+				border: none;
+			}#btn-cadastrar{
+				margin-top: 15px;
+				background-color: #00004e;
+				border: none;
+			}body{
+				background-color: #010129
+			}

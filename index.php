@@ -7,11 +7,12 @@ if (!session_start()) {
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Agenda</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>Agenda</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="https://unpkg.com/feather-icons"></script>
+		<script src="./public/jquery.js"></script>
 
 	</head>
 	<body style="padding: 0;">

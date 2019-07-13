@@ -14,24 +14,27 @@ $app = new \Slim\App;
 $app->post("/login", function(Request $request, Response $response){
 
 	$login    = addslashes($request->getParam("usuario"));
-	$password = addslashes($request->getParam("senha"));
+	$password = addHashOnPassword($request->getParam("senha"));
+	
 
-	$model         = new Server\Model\Model("todolist");
-	$dados_usuario = $model->login("usuario", $login, $password);
+
+
+	$user          = new Server\Model\User("tbl_user");
+	$data_user = $user->login($login, $password);
 
 	
-	if ($dados_usuario){
+	if ($data_user){
 		$_SESSION["SESSAO_USUARIO"]["LOGIN"] = true;
-		$_SESSION["SESSAO_USUARIO"]["NOME"]  = $dados_usuario["nome_usuario"];
+		$_SESSION["SESSAO_USUARIO"]["NOME"]  = $data_user["nome"];
 		
 		
 
 		return $response->withRedirect('/?page=agenda', 302);
 		
-		
+		exit();
 	}
 
-	$_SESSION["mensagem"] = "Login ou Senha inválidos";
+	setMessage("Login ou Senha inválidos");
 	
 	return $response->withRedirect('/?page=login', 302);
 	
@@ -81,7 +84,9 @@ $app->post('/insert', function (Request $request, Response $response, array $arg
 //ver TODAS as notas
 
 $app->get("/viewall", function(Request $request, Response $response){
-	
+	$select_params=[
+		"*"
+	];
 	
 	if (!checkLogin()) {
 
@@ -92,7 +97,7 @@ $app->get("/viewall", function(Request $request, Response $response){
 	$model = new Server\Model\Model("todolist");
 	
 		
-	$result = $model->selectAll();
+	$result = $model->select($select_params);
 
 	$response->getBody()->write(json_encode($result));
 	
@@ -176,3 +181,47 @@ $app->get("/search", function(Request $request, Response $response){
 	
 	return $response->getBody()->write($json_result);
 });
+
+/*
+$app->post("/cadastro", function(Request $request, Response $response){
+	//declarando o tipo dos campos para utilizar na função de limpeza 'sanitize'	
+	$sanitize_types = [
+		
+		"nome"     => "s",
+		"email"    => "e",
+		"senha"    => "p",
+		"rptsenha" => "p"
+	
+	]; 
+	//limpando os dados
+	$user_data_register = sanitize($sanitize_types);
+		//caso o email seja inválido
+	if (!emailValidate($user_data_register["email"])){
+		setMessage("Email inválido.");
+		
+		return $response->withRedirect("/?page=cadastro", 302);
+		
+		
+	}
+		//caso a senha não esteja igual a repetição
+	if (!$user_data_register["senha"] ===  $user_data_register["rptsenha"]) {
+		setMessage("Senhas não conferem");
+
+		return $response->withRedirect("/?page=cadastro", 302);	
+
+		
+	}
+	$user_data_register["senha"] = addHashOnPassword($user_data_register["senha"]);
+	unset($user_data_register["rptsenha"]);
+
+	$model  = new Server\Model\Model("tbl_user");
+	$result = $model->insert($user_data_register);
+
+	if ($result) {
+		
+		setMessage("Entre com seu login e senha", "success");
+		return $response->withRedirect("/?page=login", 302);
+	}
+
+});
+*/

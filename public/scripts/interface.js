@@ -7,25 +7,17 @@
 *
 */
 
-
 //intermédio back-front JQUERY
 $(document).ready(function(){
+
+
+
 	//variavel para guardar o ultimo elemento clicado
 	//uso isso no evento de edição para não bugar o sistema.
 	var lastClicked;
 	//onde as tarefas estão sendo guardadas
 	var tarefas = new Array();
 	//envia dados para serem gravados no banco de dados
-	function salvarTarefa(item) {
-		var info = {"item":item};
-		$.ajax({
-			method: "post",
-			data: info,
-			url: "https://agendadoanderson.herokuapp.com/server/index.php/insert"
-		}).done(function(){
-			retornarTarefas();
-		});
-	}
 	//função responsável por informar alterações e falhas ao usuário
 	function adicionarMesagem(mensagem, success) {
 		const type = success || false;
@@ -52,6 +44,18 @@ $(document).ready(function(){
 		}
 	}
 
+	function salvarTarefa(item) {
+		var info = {"item":item};
+		$.ajax({
+			method: "post",
+			data: info,
+			url: "/server/index.php/insert",
+			
+		}).done(function(){
+			retornarTarefas();
+			adicionarMesagem("Conteúdo adicionado com sucesso",true);
+		});
+	}
 
 	//VALIDA O PREOCESSO DE INSERÇÃO DE DADOS [INPUT]
 	function adicionarTarefa(event) {
@@ -62,7 +66,6 @@ $(document).ready(function(){
 				adicionarMesagem("Adicione algum conteúdo");
 				return false;
 			} else {
-				adicionarMesagem("Conteúdo adicionado com sucesso",true);
 				$(this).val("");
 				salvarTarefa(item);
 			}
@@ -78,7 +81,7 @@ $(document).ready(function(){
 			lastClicked = undefined;
 
 			$.ajax({
-				url: "https://agendadoanderson.herokuapp.com/server/index.php/update/"+id_texto,
+				url: "/server/index.php/update/"+id_texto,
 				data: parametros,
 				method: "put"
 
@@ -115,57 +118,63 @@ $(document).ready(function(){
 		}
 
 	}
+	
 	//fazer essa função apenas me retornar todos os valores
 	function retornarTarefas() {
-		$("#lista-tarefas").empty();
 		tarefas = [];
+		$("#lista-tarefas").empty();
 		$.ajax({
 			method: "get",
-			url: "https://agendadoanderson.herokuapp.com/server/index.php/viewall",
-			dataType: "json"
+			url: "/server/index.php/viewall",
+			dataType: "json",
+			beforeSend: function(){
+				
+				$("#mensagem").append(
+					$("<img />")
+					.attr("src", "/public/imagens/loader.gif")
+					.css({"display":"block", "margin":"auto"})
+					.addClass("loader")
+				)
+			}
 		}).done(function(response){
+			$("#mensagem").empty();
+			tarefas = response;
 			$(response).each(function(posicao, elemento){
-				/*
-					Arrumar um jeito de fazer este select apenas uma vez.
-					Armazenar em um localstorage etc para evitar ficar dando select sempre..
-
-					
-				*/
-				tarefas.push(elemento);
 				$("#lista-tarefas").append(
-					$("<li />").addClass("list-group-item").append(
-						$("<div / >").addClass("checkbox").attr("id","item")
-							.append(
-							$("<input />")
-								.attr("type","checkbox")
-								.addClass("checkbox-item")
-								.attr("value",elemento.id)
-							).append(
-							$("<label />")
-								.attr("for","checkbox")
-								.addClass("text-item")
-								.text(elemento.conteudo)
-								
-							).append(
-							$("<p />")
-								.attr("id","edit")
-								.text("editar")
-								.append($("<span />")
-									.addClass("glyphicon glyphicon-pencil")
-								).click(editarTarefa)
+							$("<li />").addClass("list-group-item").append(
+								$("<div / >").addClass("checkbox").attr("id","item")
+									.append(
+									$("<input />")
+										.attr("type","checkbox")
+										.addClass("checkbox-item")
+										.attr("value",elemento.id)
+									).append(
+									$("<label />")
+										.attr("for","checkbox")
+										.addClass("text-item")
+										.text(elemento.conteudo)
+										
+									).append(
+									$("<p />")
+										.attr("id","edit")
+										.text("editar")
+										.append($("<span />")
+											.addClass("glyphicon glyphicon-pencil")
+										).click(editarTarefa)
+									)
 							)
-					)
 				);
-			});
+			})
 		});
 	}
-
-
+	
 	retornarTarefas();
-	
 
-	$("#attLista").click(retornarTarefas);
+
+
 	
+	/* atualização da lista */
+	$("#attLista").click(retornarTarefas);
 	function confirmarExclusaoTarefas(){
 		var confirmacao = confirm("Deseja mesmo deletar estas tarefas?")	
 		if (confirmacao) {
@@ -185,7 +194,7 @@ $(document).ready(function(){
 			if ($(value).prop("checked")) {
 				$.ajax({
 					method: 'delete',
-					url:  "https://agendadoanderson.herokuapp.com/server/index.php/delete/"+$(value).val(),
+					url:  "/server/index.php/delete/"+$(value).val(),
 					dataType: "json"
 				}).done(function(response){
 					var jsonResponse = JSON.parse(response);
@@ -234,4 +243,7 @@ $(document).ready(function(){
 		
 	}
 	$("#search-item").keyup(procurarTarefa);
+	
+
+
 });
