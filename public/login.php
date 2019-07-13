@@ -12,7 +12,7 @@ if (checkLogin()) {
 			<?=getMessage()?>
 		</div> <!--mensagem-->
 			<h2 class="text-center"> Login - [ Agenda ]</h2>
-			<form action="/server/insex.php/login" id="login" method="POST">
+			<form action="/server/index.php/login" id="login" method="POST">
 				<label for="">Usuário</label>
 				<input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off">
 				<label for="">Senha</label>
