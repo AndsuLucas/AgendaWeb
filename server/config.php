@@ -16,6 +16,7 @@ define ("PATHS",[
 
 //CONFIGURAÇÕES DO BANCO
 define ("DATABASE",[
+<<<<<<< HEAD
 	"host"     => "ec2-54-204-35-248.compute-1.amazonaws.com",
 	"port"     => "5432",
 	"dbname"   => "dfvl5p5gq2704k",
@@ -26,3 +27,11 @@ define ("DATABASE",[
 //escolha uma palavra secreta para usar junto as senhas criptografadas.
 //será usada tanto no cadastro quanto nos logins
 define ("SECRETKEY","hkbsc");
+=======
+	"host"     => "",
+	"port"     => "",
+	"dbname"   => "",
+	"user"     => "",
+	"password" => ""
+]);
+>>>>>>> refs/remotes/origin/master
