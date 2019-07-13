@@ -27,10 +27,4 @@ define ("DATABASE",[
 //escolha uma palavra secreta para usar junto as senhas criptografadas.
 //será usada tanto no cadastro quanto nos logins
 define ("SECRETKEY","hkbsc");
-	"host"     => "",
-	"port"     => "",
-	"dbname"   => "",
-	"user"     => "",
-	"password" => ""
-]);
 
