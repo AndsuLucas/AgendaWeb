@@ -1,6 +1,11 @@
 <link rel="stylesheet" href="./public/css/cadastro.css">
 <div class="container" id="container-externo"> 
-	<div id="mensagem"> <?= getMessage() ?></div>
+	<div id="mensagem"> 
+		<?= getMessage() ?>
+		<ul id="avisoErro" class="alert alert-danger" style="display: none;">
+			
+		</ul>
+	</div>
 	<form id="frm-cadastro" method="POST" action="#">
 		<h1 class="text-center">Cadastro</h1>
 		<div class="form-group">
@@ -31,44 +36,63 @@
 		const formulario = $("#frm-cadastro");
 		
 		 $(formulario).submit(function(event){
-			const nome     =  $("#nome");
-			const senha    = $("#senha");
-			const rptsenha = $("#rptsenha");
-			const email    = $("#email");
-			
+			const nome      = $("#nome");
+			const senha     = $("#senha");
+			const rptsenha  = $("#rptsenha");
+			const email     = $("#email");
+			const avisoErro = $("#avisoErro");
 			var validation = true;
 		
 			
 			if ($(nome).val().trim().length === 0){
-			
-				$(nome).css("background-color", "#ff000061")
+				avisoErro.append(
+					$("<li />")
+						.addClass("font-weight-bold")
+						.text("O campo NOME deve ser inserido")
+				);
 				validation = false;
 				
 
 			}
 			if ($(email).val().trim().length === 0){
-				$(email).css("background-color", "#ff000061")
+				avisoErro.append(
+					$("<li />")
+						.addClass("font-weight-bold")
+						.text("O campo E-MAIL deve ser inserido")
+				);
 				validation = false;
 			}
 			
 			if ($(senha).val().trim().length === 0){
-				$(senha).css("background-color", "#ff000061")
+				avisoErro.append(
+					$("<li />")
+						.addClass("font-weight-bold")
+						.text("O campo SENHA deve ser inserido")
+				);
 				validation = false;
 
 			}
 			if ($(rptsenha).val().trim().length === 0){
-				$(rptsenha).css("background-color", "#ff000061")
+				avisoErro.append(
+					$("<li />")
+						.addClass("font-weight-bold")
+						.text("O campo REPETIR SENHA deve ser inserido")
+				);
 				validation = false;
 			}
 			if ($(senha).val() !== $(rptsenha).val()){
-				$(senha).css("background-color", "#ff000061");
-				$(rptsenha).css("background-color", "#ff000061");
+				avisoErro.append(
+					$("<li />")
+						.addClass("font-weight-bold")
+						.text("Senhas não conferem")
+				);
 				validation = false;
 			
 			}
-
-			return validation;
-			
+			if (!validation){
+				avisoErro.css("display", "block");
+				return validation;
+			}
 			
 			
 		});
