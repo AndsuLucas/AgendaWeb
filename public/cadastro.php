@@ -40,8 +40,11 @@
 		
 			
 			if ($(nome).val().trim().length === 0){
+			
 				$(nome).css("background-color", "#ff000061")
 				validation = false;
+				
+
 			}
 			if ($(email).val().trim().length === 0){
 				$(email).css("background-color", "#ff000061")
