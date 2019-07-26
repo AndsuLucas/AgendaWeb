@@ -182,7 +182,7 @@ $app->get("/search", function(Request $request, Response $response){
 	return $response->getBody()->write($json_result);
 });
 
-/*
+
 $app->post("/cadastro", function(Request $request, Response $response){
 	//declarando o tipo dos campos para utilizar na função de limpeza 'sanitize'	
 	$sanitize_types = [
@@ -224,4 +224,3 @@ $app->post("/cadastro", function(Request $request, Response $response){
 	}
 
 });
-*/
